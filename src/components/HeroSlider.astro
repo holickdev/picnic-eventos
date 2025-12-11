@@ -1,0 +1,252 @@
+---
+// src/components/HeroSlider.astro
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+const heroImages = [
+    "https://images.unsplash.com/photo-1715341731308-447fb22698bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBwaWNuaWMlMjBzZXR1cHxlbnwxfHx8fDE3NjQ5NTg0MTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    "https://images.unsplash.com/photo-1764265930328-72716076e3ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVnYW50JTIwb3V0ZG9vciUyMGRpbmluZ3xlbnwxfHx8fDE3NjQ5NTg0MTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    "https://images.unsplash.com/photo-1760669348014-c23b78739fe7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyb21hbnRpYyUyMGNlbGVicmF0aW9uJTIwdGFibGV8ZW58MXx8fHwxNzY0OTU4NDEzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+];
+---
+
+<section class="relative w-full h-screen overflow-hidden">
+    <!-- Slider Container -->
+    <div class="absolute inset-0">
+        {
+            heroImages.map((img, index) => (
+                <div
+                    class={`hero-slide absolute inset-0 w-full h-full transition-opacity duration-800 ${index === 0 ? "opacity-100" : "opacity-0"}`}
+                    data-slide-index={index}
+                >
+                    <img
+                        src={img}
+                        alt={`Luxury picnic event ${index + 1}`}
+                        class="w-full h-full object-cover"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
+                </div>
+            ))
+        }
+    </div>
+
+    <!-- Navigation Arrows -->
+    <button
+        id="prev-slide"
+        class="absolute left-4 md:left-12 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-14 md:h-14 rounded-full glass-morphism flex items-center justify-center hover:bg-white/60 transition-all duration-300 group"
+        aria-label="Previous slide"
+    >
+        <ChevronLeft
+            className="w-5 h-5 md:w-6 md:h-6 text-[var(--color-graphite)] group-hover:-translate-x-1 transition-transform"
+        />
+    </button>
+
+    <button
+        id="next-slide"
+        class="absolute right-4 md:right-12 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-14 md:h-14 rounded-full glass-morphism flex items-center justify-center hover:bg-white/60 transition-all duration-300 group"
+        aria-label="Next slide"
+    >
+        <ChevronRight
+            className="w-5 h-5 md:w-6 md:h-6 text-[var(--color-graphite)] group-hover:translate-x-1 transition-transform"
+        />
+    </button>
+
+    <!-- Dots Indicator -->
+    <div
+        class="absolute bottom-8 md:bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-2"
+        id="dots-container"
+    >
+        {
+            heroImages.map((_, index) => (
+                <button
+                    class={`dot h-1 rounded-full transition-all duration-300 ${
+                        index === 0
+                            ? "bg-[var(--color-dusty-rose)] w-8"
+                            : "bg-white/40 w-8 hover:bg-white/60"
+                    }`}
+                    data-dot-index={index}
+                    aria-label={`Go to slide ${index + 1}`}
+                />
+            ))
+        }
+    </div>
+
+    <!-- Hero Content - Overlapping Text -->
+    <div
+        class="absolute inset-0 z-10 flex items-center justify-center px-5 md:px-12 pb-20 md:pb-0"
+    >
+        <div class="max-w-[1600px] w-full mx-auto">
+            <div class="relative">
+                <!-- Main Display Title -->
+                <div
+                    class="relative animate-on-load animate-fade-in-up animate-delay-600"
+                >
+                    <h1
+                        class="text-3xl sm:text-4xl md:text-display text-white mix-blend-difference select-none leading-tight"
+                        style="text-shadow: 2px 2px 20px rgba(0,0,0,0.5)"
+                    >
+                        MOMENTOS INOLVIDABLES
+                    </h1>
+                </div>
+
+                <!-- Subtitle with organic shape background -->
+                <div
+                    class="relative mt-4 md:mt-8 ml-0 md:ml-12 max-w-lg animate-on-load animate-fade-in-left animate-delay-800"
+                >
+                    <div
+                        class="relative z-10 bg-white/90 backdrop-blur-md px-5 py-4 md:px-8 md:py-6 rounded-3xl shadow-xl"
+                    >
+                        <p
+                            class="text-[var(--color-graphite)] text-sm md:text-xl leading-relaxed"
+                        >
+                            Experiencias únicas que transforman celebraciones en
+                            recuerdos inolvidables
+                        </p>
+                    </div>
+
+                    <!-- Decorative floating element -->
+                    <div
+                        class="absolute -top-4 -right-4 w-16 h-16 bg-[var(--color-dusty-rose)] opacity-40 rounded-full blur-xl animate-float"
+                    >
+                    </div>
+                </div>
+
+                <!-- CTA Button -->
+                <div
+                    class="mt-6 md:mt-16 ml-0 md:ml-12 animate-on-load animate-fade-in-up animate-delay-1000"
+                >
+                    <a
+                        href="#experiencias"
+                        class="inline-flex items-center justify-center glass-morphism px-6 py-3 md:px-10 md:py-5 min-h-[48px] rounded-full hover:bg-white/70 transition-all duration-500 group shadow-lg"
+                    >
+                        <span
+                            class="text-sm md:text-lg tracking-wide text-[var(--color-graphite)] group-hover:text-[var(--color-dusty-rose)] transition-colors"
+                        >
+                            Descubre Nuestras Experiencias
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll Indicator - Hidden on mobile -->
+    <div
+        class="absolute bottom-24 md:bottom-12 left-1/2 -translate-x-1/2 z-10 hidden md:block animate-on-load animate-fade-in animate-delay-1000"
+    >
+        <div
+            class="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center pt-2"
+        >
+            <div class="w-1 h-3 bg-white/60 rounded-full animate-bounce"></div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Hero Slider functionality
+    let currentSlide = 0;
+    const slides = document.querySelectorAll(
+        ".hero-slide",
+    ) as NodeListOf<HTMLElement>;
+    const dots = document.querySelectorAll(".dot") as NodeListOf<HTMLElement>;
+    const totalSlides = slides.length;
+
+    function showSlide(index: number) {
+        // Hide all slides
+        slides.forEach((slide) => {
+            slide.style.opacity = "0";
+        });
+
+        // Show current slide
+        if (slides[index]) {
+            slides[index].style.opacity = "1";
+        }
+
+        // Update dots
+        dots.forEach((dot, i) => {
+            if (i === index) {
+                dot.classList.add("bg-[var(--color-dusty-rose)]", "w-8");
+                dot.classList.remove("bg-white/40");
+            } else {
+                dot.classList.remove("bg-[var(--color-dusty-rose)]", "w-8");
+                dot.classList.add("bg-white/40");
+            }
+        });
+
+        currentSlide = index;
+    }
+
+    function nextSlide() {
+        const next = (currentSlide + 1) % totalSlides;
+        showSlide(next);
+    }
+
+    function prevSlide() {
+        const prev = (currentSlide - 1 + totalSlides) % totalSlides;
+        showSlide(prev);
+    }
+
+    // Auto-play slider
+    let autoPlayInterval = setInterval(nextSlide, 5000);
+
+    // Navigation buttons
+    const prevBtn = document.getElementById("prev-slide");
+    const nextBtn = document.getElementById("next-slide");
+
+    if (prevBtn) {
+        prevBtn.addEventListener("click", () => {
+            prevSlide();
+            // Restart auto-play
+            clearInterval(autoPlayInterval);
+            autoPlayInterval = setInterval(nextSlide, 5000);
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener("click", () => {
+            nextSlide();
+            // Restart auto-play
+            clearInterval(autoPlayInterval);
+            autoPlayInterval = setInterval(nextSlide, 5000);
+        });
+    }
+
+    // Dot navigation
+    dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+            showSlide(index);
+            // Restart auto-play
+            clearInterval(autoPlayInterval);
+            autoPlayInterval = setInterval(nextSlide, 5000);
+        });
+    });
+
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("in-view");
+                (entry.target as HTMLElement).style.opacity = "1";
+            }
+        });
+    }, observerOptions);
+
+    // Observe all animate-on-load elements
+    document.querySelectorAll(".animate-on-load").forEach((el) => {
+        observer.observe(el);
+    });
+</script>
+
+<style>
+    .hero-slide {
+        will-change: opacity;
+    }
+
+    .dot {
+        will-change: width, background-color;
+    }
+</style>

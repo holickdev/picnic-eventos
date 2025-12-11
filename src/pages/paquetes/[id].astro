@@ -1,0 +1,148 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { ArrowLeft, Users, Sparkles } from "lucide-react";
+import { packages } from "@/data/packages";
+import { PackageImageGallery } from "@/components/PackageImageGallery";
+import { PackageBookingCard } from "@/components/PackageBookingCard";
+
+// Static paths generation - se ejecuta en build time
+export async function getStaticPaths() {
+    return packages.map((pkg) => ({
+        params: { id: pkg.id },
+        props: { pkg }, // Pasa el paquete como prop
+    }));
+}
+
+const { pkg } = Astro.props;
+
+// Metadata para SEO
+const pageTitle = `${pkg.title} - Picnic Eventos`;
+const pageDescription = `${pkg.description} ${pkg.capacity}. Precio: $${pkg.price} USD.`;
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+    <main class="min-h-screen bg-[var(--color-pearl)] pb-20">
+        {/* Hero Section - Server-Side Rendered */}
+        <div class="relative h-[60vh] md:h-[70vh] overflow-hidden">
+            {/* Image Gallery Component - Cliente */}
+            <PackageImageGallery
+                images={pkg.images}
+                title={pkg.title}
+                client:load
+            />
+
+            {/* Overlay Gradient */}
+            <div
+                class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 pointer-events-none"
+            >
+            </div>
+
+            {/* Back Button - Static */}
+            <a
+                href="/#experiencias"
+                class="absolute top-20 md:top-6 left-4 md:left-6 z-20 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-white transition-all"
+            >
+                <ArrowLeft className="w-5 h-5 text-[var(--color-graphite)]" />
+            </a>
+
+            {/* Package Title Overlay - Server-Side */}
+            <div class="absolute bottom-0 left-0 right-0 p-6 md:p-12">
+                <div class="max-w-7xl mx-auto">
+                    {
+                        pkg.bestSeller && (
+                            <span class="inline-block px-4 py-1.5 bg-white/95 text-[var(--color-dusty-rose)] rounded-full mb-4">
+                                ✨ Best Seller
+                            </span>
+                        )
+                    }
+                    <div
+                        class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-4"
+                    >
+                        <h1 class="text-white">{pkg.title}</h1>
+                        <div class="flex items-baseline gap-3 shrink-0">
+                            <span
+                                class="text-5xl md:text-6xl lg:text-7xl text-white"
+                                >${pkg.price}</span
+                            >
+                            <span class="text-xl text-white/80">USD</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {/* Content Section - Server-Side */}
+        <div class="max-w-7xl mx-auto px-5 md:px-12 py-12 md:py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                {/* Main Content */}
+                <div class="lg:col-span-2">
+                    {/* Capacity */}
+                    <div
+                        class="mb-8 p-6 bg-white rounded-3xl shadow-lg border border-[var(--color-dusty-rose)]/10 animate-fade-in-up"
+                    >
+                        <div class="flex items-center gap-3 mb-2">
+                            <Users
+                                className="w-6 h-6 text-[var(--color-dusty-rose)]"
+                            />
+                            <h3>Capacidad</h3>
+                        </div>
+                        <p class="text-[var(--color-graphite)]/70">
+                            {pkg.capacity}
+                        </p>
+                    </div>
+
+                    {/* What's Included */}
+                    <div
+                        class="bg-white rounded-3xl shadow-lg p-8 md:p-10 border border-[var(--color-dusty-rose)]/10 animate-fade-in-up"
+                    >
+                        <div class="flex items-center gap-3 mb-6">
+                            <Sparkles
+                                className="w-6 h-6 text-[var(--color-dusty-rose)]"
+                            />
+                            <h3>¿Qué Incluye?</h3>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {
+                                pkg.items.map((item) => (
+                                    <div class="flex items-center gap-3 p-4 bg-[var(--color-soft-sand)]/30 rounded-2xl">
+                                        <div class="w-2.5 h-2.5 rounded-full bg-[var(--color-dusty-rose)] flex-shrink-0" />
+                                        <span class="text-[var(--color-graphite)]">
+                                            {item}
+                                        </span>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
+
+                    {/* Description */}
+                    <div
+                        class="mt-8 p-8 bg-gradient-to-br from-[var(--color-dusty-rose)]/5 to-[var(--color-dusty-rose)]/10 rounded-3xl border border-[var(--color-dusty-rose)]/10 animate-fade-in-up"
+                    >
+                        <h4 class="mb-3">Sobre este paquete</h4>
+                        <p
+                            class="text-[var(--color-graphite)]/70 leading-relaxed"
+                        >
+                            {pkg.description} Perfecto para crear momentos inolvidables
+                            con todos los detalles cuidados para ti.
+                        </p>
+                    </div>
+                </div>
+
+                {/* Sidebar - Booking Card (Client Component) */}
+                <div class="lg:col-span-1">
+                    <PackageBookingCard
+                        packageData={{
+                            id: pkg.id,
+                            title: pkg.title,
+                            price: pkg.price,
+                            capacity: pkg.capacity,
+                        }}
+                        client:load
+                    />
+                </div>
+            </div>
+        </div>
+    </main>
+</Layout>

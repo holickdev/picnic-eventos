@@ -1,0 +1,186 @@
+---
+// src/components/DetailsSection.astro
+import { Sparkle, Palette, Utensils, Calendar } from "lucide-react";
+
+const features = [
+    {
+        icon: Palette,
+        title: "Estaciones Temáticas Interactivas",
+        description:
+            "Entretenimiento para tus eventos: Estación de Arte y Pintura, Decoración de Macetas, Bisutería, Tote Bags y Pastelería.",
+    },
+    {
+        icon: Utensils,
+        title: "Table Styling",
+        description:
+            "Decoración de mesas de lujo para restaurantes o cenas en casa.",
+    },
+    {
+        icon: Calendar,
+        title: "Event Planner",
+        description:
+            "Organización integral de Bodas, Cumpleaños, Baby Showers y Aniversarios.",
+    },
+];
+---
+
+<section class="relative py-12 md:py-20 lg:py-32 overflow-hidden">
+    <div class="max-w-[1600px] mx-auto px-5 md:px-6 lg:px-12">
+        <!-- Mixed Composition - Arch Shape & Text -->
+        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center">
+            <!-- Left: Image with Arch Shape -->
+            <div
+                class="relative order-1 lg:order-1 animate-on-load animate-fade-in-left"
+            >
+                <div class="relative">
+                    <!-- Main arch image -->
+                    <div
+                        class="relative rounded-[3rem_3rem_3rem_10rem] overflow-hidden shadow-luxury aspect-[4/5]"
+                    >
+                        <img
+                            src="https://images.unsplash.com/photo-1647235639994-00373cf008a6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxib2hvJTIwcGljbmljJTIwYWVzdGhldGljfGVufDF8fHx8MTc2NDk1ODQxM3ww&ixlib=rb-4.1.0&q=80&w=1080"
+                            alt="Luxury picnic setup detail"
+                            class="w-full h-full object-cover"
+                        />
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"
+                        >
+                        </div>
+                    </div>
+
+                    <!-- Overlapping smaller image -->
+                    <div
+                        class="absolute -bottom-8 md:-bottom-12 -right-8 md:-right-12 w-48 h-48 md:w-64 md:h-64 rounded-[2rem_5rem_2rem_2rem] overflow-hidden shadow-luxury border-4 md:border-8 border-[var(--color-pearl)] animate-on-load animate-scale-in animate-delay-400"
+                    >
+                        <img
+                            src="https://images.unsplash.com/photo-1758315526786-3ef1e3b07f7b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGFtcGFnbmUlMjBjZWxlYnJhdGlvbiUyMG91dGRvb3J8ZW58MXx8fHwxNzY0OTU4NDE0fDA&ixlib=rb-4.1.0&q=80&w=1080"
+                            alt="Champagne celebration detail"
+                            class="w-full h-full object-cover"
+                        />
+                    </div>
+
+                    <!-- Floating decorative sparkles -->
+                    <div class="absolute -top-6 -left-6 hidden md:block">
+                        <Sparkle
+                            className="w-8 h-8 text-[var(--color-dusty-rose)] fill-[var(--color-dusty-rose)] opacity-60 animate-float-rotate"
+                        />
+                    </div>
+
+                    <div class="absolute top-1/3 -right-8 hidden md:block">
+                        <Sparkle
+                            className="w-6 h-6 text-[var(--color-dusty-rose)] fill-[var(--color-dusty-rose)] opacity-50 animate-float"
+                            style={{ animationDelay: "1s" }}
+                        />
+                    </div>
+
+                    <div
+                        class="absolute top-1/4 left-1/4 w-24 h-24 bg-[var(--color-dusty-rose)] rounded-full blur-3xl opacity-20 pointer-events-none animate-pulse"
+                    >
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Text Content -->
+            <div
+                class="relative lg:pl-8 order-2 lg:order-2 mt-12 lg:mt-0 animate-on-load animate-fade-in-right"
+            >
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-[2px] bg-gradient-rose"></div>
+                    <span
+                        class="text-sm tracking-[0.2em] uppercase text-[var(--color-dusty-rose)]"
+                    >
+                        Por qué elegirnos
+                    </span>
+                </div>
+
+                <h2 class="text-display mb-8">Más que un Picnic</h2>
+
+                <p
+                    class="text-lg text-[var(--color-graphite)]/80 mb-12 leading-relaxed"
+                >
+                    En Picnic Eventos Mgta, creemos que las celebraciones más
+                    memorables nacen de la atención a los pequeños detalles.
+                    Cada elemento, desde la selección de flores hasta la
+                    disposición de los cojines, se elige cuidadosamente para
+                    crear una atmósfera mágica.
+                </p>
+
+                <!-- Features List -->
+                <div class="space-y-8">
+                    {
+                        features.map((feature, index) => {
+                            const Icon = feature.icon;
+                            return (
+                                <div
+                                    class="flex gap-6 group animate-on-load animate-fade-in-up"
+                                    style={`animation-delay: ${0.6 + index * 0.15}s;`}
+                                >
+                                    <div class="flex-shrink-0">
+                                        <div class="w-14 h-14 rounded-[1rem_0.5rem_1rem_0.5rem] bg-gradient-to-br from-[var(--color-dusty-rose)]/10 to-[var(--color-dusty-rose)]/5 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                            <Icon className="w-6 h-6 text-[var(--color-dusty-rose)]" />
+                                        </div>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h4 class="mb-2">{feature.title}</h4>
+                                        <p class="text-[var(--color-graphite)]/70">
+                                            {feature.description}
+                                        </p>
+                                    </div>
+                                </div>
+                            );
+                        })
+                    }
+                </div>
+
+                <!-- CTA Button -->
+                <div
+                    class="mt-12 animate-on-load animate-fade-in-up animate-delay-1000"
+                >
+                    <button
+                        class="group relative px-10 py-5 bg-gradient-rose text-white rounded-full overflow-hidden transition-all duration-500 hover:shadow-2xl"
+                    >
+                        <span class="relative z-10 text-lg tracking-wide">
+                            Reserva Tu Experiencia
+                        </span>
+                        <div
+                            class="absolute inset-0 bg-[var(--color-graphite)] translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-400"
+                        >
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Background decorative elements -->
+    <div
+        class="absolute top-1/4 left-0 w-64 h-64 bg-gradient-to-br from-[var(--color-dusty-rose)]/5 to-transparent rounded-full blur-3xl pointer-events-none"
+    >
+    </div>
+    <div
+        class="absolute bottom-1/4 right-0 w-96 h-96 bg-gradient-to-bl from-[var(--color-dusty-rose)]/5 to-transparent rounded-full blur-3xl pointer-events-none"
+    >
+    </div>
+</section>
+
+<script>
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("in-view");
+                entry.target.style.opacity = "1";
+            }
+        });
+    }, observerOptions);
+
+    // Observe all animate-on-load elements
+    document.querySelectorAll(".animate-on-load").forEach((el) => {
+        observer.observe(el);
+    });
+</script>

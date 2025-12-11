@@ -1,0 +1,203 @@
+---
+// src/components/Navbar.astro
+import { Menu, X } from "lucide-react";
+
+const menuItems = [
+    { label: "Paquetes", href: "/#paquetes" },
+    { label: "Estaciones", href: "/#estaciones" },
+    { label: "FAQ", href: "/faq" },
+    { label: "Términos", href: "/terminos" },
+];
+---
+
+<nav
+    id="main-navbar"
+    class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 animate-on-load animate-fade-in-down"
+>
+    <div
+        class="max-w-[1600px] mx-auto px-5 md:px-6 lg:px-12 py-5 md:py-6 flex justify-between items-center"
+    >
+        <!-- Logo -->
+        <div class="relative z-10 cursor-pointer">
+            <h4 class="text-xl md:text-display italic tracking-wide">
+                Picnic{" "}
+                <span class="text-[var(--color-dusty-rose)]">Eventos</span>
+            </h4>
+        </div>
+
+        <!-- Desktop Menu -->
+        <div class="hidden lg:flex items-center gap-8">
+            {
+                menuItems.map((item, index) => (
+                    <a
+                        href={item.href}
+                        class="menu-item relative text-sm tracking-wide hover:text-[var(--color-dusty-rose)] transition-colors duration-300 group"
+                        style={`animation-delay: ${0.4 + index * 0.1}s;`}
+                    >
+                        {item.label}
+                        <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-[var(--color-dusty-rose)] transition-all duration-300 group-hover:w-full" />
+                    </a>
+                ))
+            }
+        </div>
+
+        <!-- Hamburger Menu Button -->
+        <button
+            id="mobile-menu-toggle"
+            class="lg:hidden relative z-50 p-2 rounded-full hover:bg-white/20 transition-all duration-300"
+            aria-label="Toggle menu"
+        >
+            <Menu className="menu-icon w-6 h-6" />
+            <X className="close-icon w-6 h-6 hidden" />
+        </button>
+    </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div
+    id="mobile-menu"
+    class="fixed inset-0 z-40 lg:hidden pointer-events-none opacity-0 transition-opacity duration-400"
+>
+    <div class="absolute inset-0 bg-white/95 backdrop-blur-2xl"></div>
+    <div
+        class="relative h-full flex flex-col justify-center items-center gap-8 px-8"
+    >
+        {
+            menuItems.map((item, index) => (
+                <a
+                    href={item.href}
+                    class="mobile-menu-item text-4xl text-display hover:text-[var(--color-dusty-rose)] transition-colors duration-300 opacity-0 translate-x-12"
+                    style={`transition-delay: ${index * 100}ms;`}
+                >
+                    {item.label}
+                </a>
+            ))
+        }
+    </div>
+</div>
+
+<script>
+    // Navbar scroll behavior
+    const navbar = document.getElementById("main-navbar");
+    let lastScroll = 0;
+
+    function handleScroll() {
+        const currentScroll = window.scrollY;
+
+        if (navbar) {
+            if (currentScroll > 50) {
+                navbar.classList.add(
+                    "bg-white/80",
+                    "backdrop-blur-xl",
+                    "shadow-sm",
+                );
+                navbar.classList.remove("bg-transparent");
+            } else {
+                navbar.classList.remove(
+                    "bg-white/80",
+                    "backdrop-blur-xl",
+                    "shadow-sm",
+                );
+                navbar.classList.add("bg-transparent");
+            }
+        }
+
+        lastScroll = currentScroll;
+    }
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Mobile menu toggle
+    const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const menuIcon = document.querySelector(".menu-icon");
+    const closeIcon = document.querySelector(".close-icon");
+    const mobileMenuItems = document.querySelectorAll(".mobile-menu-item");
+    let isMenuOpen = false;
+
+    function toggleMobileMenu() {
+        isMenuOpen = !isMenuOpen;
+
+        if (isMenuOpen) {
+            // Open menu
+            mobileMenu?.classList.remove("pointer-events-none", "opacity-0");
+            mobileMenu?.classList.add("pointer-events-auto", "opacity-100");
+            menuIcon?.classList.add("hidden");
+            closeIcon?.classList.remove("hidden");
+
+            // Animate menu items in
+            mobileMenuItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.remove("opacity-0", "translate-x-12");
+                    item.classList.add("opacity-100", "translate-x-0");
+                }, index * 100);
+            });
+
+            // Prevent body scroll
+            document.body.style.overflow = "hidden";
+        } else {
+            // Close menu
+            mobileMenu?.classList.add("pointer-events-none", "opacity-0");
+            mobileMenu?.classList.remove("pointer-events-auto", "opacity-100");
+            menuIcon?.classList.remove("hidden");
+            closeIcon?.classList.add("hidden");
+
+            // Animate menu items out
+            mobileMenuItems.forEach((item) => {
+                item.classList.add("opacity-0", "translate-x-12");
+                item.classList.remove("opacity-100", "translate-x-0");
+            });
+
+            // Restore body scroll
+            document.body.style.overflow = "";
+        }
+    }
+
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener("click", toggleMobileMenu);
+    }
+
+    // Close menu when clicking on a link
+    mobileMenuItems.forEach((item) => {
+        item.addEventListener("click", () => {
+            if (isMenuOpen) {
+                toggleMobileMenu();
+            }
+        });
+    });
+
+    // Close menu on escape key
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && isMenuOpen) {
+            toggleMobileMenu();
+        }
+    });
+
+    // Intersection Observer for menu items animation
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("in-view");
+                (entry.target as HTMLElement).style.opacity = "1";
+            }
+        });
+    }, observerOptions);
+
+    // Observe all animate-on-load elements
+    document.querySelectorAll(".animate-on-load").forEach((el) => {
+        observer.observe(el);
+    });
+</script>
+
+<style>
+    .mobile-menu-item {
+        transition:
+            opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+            transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+</style>
