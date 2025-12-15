@@ -1,0 +1,114 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { ArrowLeft, Sparkles } from "lucide-react";
+import { stations } from "@/data/packages";
+import { StationImageGallery } from "@/components/StationImageGallery";
+import { StationBookingCard } from "@/components/StationBookingCard";
+
+// Static paths generation - se ejecuta en build time
+export async function getStaticPaths() {
+    return stations.map((station) => ({
+        params: { id: station.id },
+        props: { station }, // Pasa la estación como prop
+    }));
+}
+
+const { station } = Astro.props;
+
+// Metadata para SEO
+const pageTitle = `${station.title} - Picnic Eventos`;
+const pageDescription = `${station.description} Precio bajo consulta.`;
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+    <main class="min-h-screen bg-[var(--color-pearl)] pb-20">
+        {/* Hero Section - Server-Side Rendered */}
+        <div class="relative h-[60vh] md:h-[70vh] overflow-hidden">
+            {/* Image Gallery Component - Cliente */}
+            <StationImageGallery
+                images={station.images}
+                title={station.title}
+                client:load
+            />
+
+            {/* Overlay Gradient */}
+            <div
+                class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 pointer-events-none"
+            >
+            </div>
+
+            {/* Back Button - Static */}
+            <a
+                href="/#experiencias"
+                class="absolute top-20 md:top-6 left-4 md:left-6 z-20 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-white transition-all"
+            >
+                <ArrowLeft className="w-5 h-5 text-[var(--color-graphite)]" />
+            </a>
+
+            {/* Station Title Overlay - Server-Side */}
+            <div class="absolute bottom-0 left-0 right-0 p-6 md:p-12">
+                <div class="max-w-7xl mx-auto">
+                    <h1 class="text-white mb-2">{station.title}</h1>
+                    <p class="text-lg text-white/80">Precio bajo consulta</p>
+                </div>
+            </div>
+        </div>
+
+        {/* Content Section - Server-Side */}
+        <div class="max-w-7xl mx-auto px-5 md:px-12 py-12 md:py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                {/* Main Content */}
+                <div class="lg:col-span-2">
+                    {/* What's Included */}
+                    <div
+                        class="bg-white rounded-3xl shadow-lg p-8 md:p-10 border border-[var(--color-dusty-rose)]/10 animate-fade-in-up"
+                    >
+                        <div class="flex items-center gap-3 mb-6">
+                            <Sparkles
+                                className="w-6 h-6 text-[var(--color-dusty-rose)]"
+                            />
+                            <h3>¿Qué Incluye?</h3>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {
+                                station.includes.map((item) => (
+                                    <div class="flex items-center gap-3 p-4 bg-[var(--color-dusty-rose)]/10 rounded-2xl">
+                                        <div class="w-2.5 h-2.5 rounded-full bg-[var(--color-dusty-rose)] flex-shrink-0" />
+                                        <span class="text-[var(--color-graphite)]">
+                                            {item}
+                                        </span>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
+
+                    {/* Description */}
+                    <div
+                        class="mt-8 p-8 bg-gradient-to-br from-[var(--color-dusty-rose)]/5 to-[var(--color-dusty-rose)]/10 rounded-3xl border border-[var(--color-dusty-rose)]/10 animate-fade-in-up"
+                    >
+                        <h4 class="mb-3">Sobre esta estación</h4>
+                        <p
+                            class="text-[var(--color-graphite)]/70 leading-relaxed"
+                        >
+                            {station.description} Una experiencia única que tus invitados
+                            recordarán por siempre.
+                        </p>
+                    </div>
+                </div>
+
+                {/* Sidebar - Booking Card (Client Component) */}
+                <div class="lg:col-span-1">
+                    <StationBookingCard
+                        stationData={{
+                            id: station.id,
+                            title: station.title,
+                        }}
+                        client:load
+                    />
+                </div>
+            </div>
+        </div>
+    </main>
+</Layout>

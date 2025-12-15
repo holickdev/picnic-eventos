@@ -46,11 +46,10 @@ const {
     <title>{title}</title>
   </head>
   <body>
-    <Navbar />
+    <Navbar transition:persist />
     <slot />
-    <ShoppingCart client:load />
-
-    <Footer />
+    <ShoppingCart client:load transition:persist />
+    <Footer transition:persist />
   </body>
 </html>
 

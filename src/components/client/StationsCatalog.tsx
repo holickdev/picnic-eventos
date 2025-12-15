@@ -4,12 +4,8 @@ import { StationCard } from './StationCard';
 import { Sparkles, ArrowRight } from 'lucide-react';
 import { stations } from '../data/packages';
 
-interface StationsCatalogProps {
-  onNavigateToStation?: (stationId: string) => void;
-  onAddToCart: (stationId: string) => void;
-}
-
-export function StationsCatalog({ onNavigateToStation, onAddToCart }: StationsCatalogProps) {
+// StationCard handles navigation and cart internally - no props needed
+export function StationsCatalog() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: 'left' | 'right') => {
@@ -98,8 +94,6 @@ export function StationsCatalog({ onNavigateToStation, onAddToCart }: StationsCa
               title={station.title}
               description={station.description}
               images={station.images}
-              onNavigateToStation={onNavigateToStation}
-              onAddToCart={onAddToCart}
             />
           ))}
         </div>

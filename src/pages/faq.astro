@@ -3,10 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 
 import { FaqContainer } from "@/containers/FaqContainer";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { ArrowLeft, ChevronDown, HelpCircle } from "lucide-react";
-import { FaqItem } from "@/components/FaqItem";
+import { ArrowLeft, HelpCircle } from "lucide-react";
 
 interface Faq {
   question: string;
@@ -39,13 +36,13 @@ const faqs: Faq[] = [
       <div
         class="relative bg-gradient-to-br from-[var(--color-dusty-rose)] to-[var(--color-champagne)] py-20 md:py-32 px-5 md:px-12"
       >
-        {/* Back Button */}
+        <!-- {/* Back Button */}
         <a
           href="/"
           class="absolute top-20 md:top-6 left-4 md:left-6 z-20 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-white transition-all animate-on-load animate-fade-in-left"
         >
           <ArrowLeft className="w-5 h-5 text-[var(--color-graphite)]" />
-        </a>
+        </a> -->
 
         <div class="max-w-4xl mx-auto text-center">
           <div
@@ -108,26 +105,24 @@ const faqs: Faq[] = [
       </div>
     </div>
   </main>
-</Layout>
+  <script>
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    };
 
-<script>
-  // Intersection Observer for scroll animations
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px",
-  };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+        }
+      });
+    }, observerOptions);
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("in-view");
-        (entry.target as HTMLElement).style.opacity = "1";
-      }
+    // Observe all animate-on-load elements
+    document.querySelectorAll(".animate-on-load").forEach((el) => {
+      observer.observe(el);
     });
-  }, observerOptions);
-
-  // Observe all animate-on-load elements
-  document.querySelectorAll(".animate-on-load").forEach((el) => {
-    observer.observe(el);
-  });
-</script>
+  </script>
+</Layout>

@@ -4,12 +4,7 @@ import { Sparkles, ArrowRight } from "lucide-react";
 import { StationCard } from "./StationCard";
 import { stations } from "../data/packages";
 
-interface Props {
-    onNavigateToStation?: (stationId: string) => void;
-    onAddToCart?: (stationId: string) => void;
-}
-
-const { onNavigateToStation, onAddToCart } = Astro.props;
+// No props needed - StationCard handles navigation and cart internally
 ---
 
 <section
@@ -79,8 +74,6 @@ const { onNavigateToStation, onAddToCart } = Astro.props;
                         title={station.title}
                         description={station.description}
                         images={station.images}
-                        onNavigateToStation={onNavigateToStation}
-                        onAddToCart={onAddToCart}
                         client:visible
                     />
                 ))

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Plus, ChevronLeft, ChevronRight, ShoppingBag } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ShoppingBag } from 'lucide-react';
 import { addStationToCart } from '@/stores/cartStore';
 
 interface StationCardProps {
@@ -8,10 +8,9 @@ interface StationCardProps {
   title: string;
   description: string;
   images: string[];
-  onNavigateToStation?: (id: string) => void;
 }
 
-export function StationCard({ id, title, description, images, onNavigateToStation }: StationCardProps) {
+export function StationCard({ id, title, description, images }: StationCardProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -117,14 +116,12 @@ export function StationCard({ id, title, description, images, onNavigateToStatio
           <p className="text-xs text-[var(--color-dusty-rose)] mb-6">Precio bajo consulta</p>
 
           {/* View Details Button */}
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => onNavigateToStation?.(id)}
-            className="w-full py-3 rounded-full border-2 border-[var(--color-dusty-rose)] text-[var(--color-dusty-rose)] hover:bg-[var(--color-dusty-rose)] hover:text-white transition-all duration-300"
+          <a
+            href={`/experiencias/${id}`}
+            className="w-full py-3 rounded-full border-2 border-[var(--color-dusty-rose)] text-[var(--color-dusty-rose)] hover:bg-[var(--color-dusty-rose)] hover:text-white transition-all duration-300 flex items-center justify-center"
           >
             Ver Detalles
-          </motion.button>
+          </a>
 
           {/* Add to Cart Button */}
           <motion.button
