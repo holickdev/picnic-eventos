@@ -79,37 +79,47 @@ const menuItems = [
 
     <script>
         // Navbar scroll behavior
-        const navbar = document.getElementById("main-navbar");
-        let lastScroll = 0;
+        function initNavbarScroll() {
+            const navbar = document.getElementById("main-navbar");
+            let lastScroll = 0;
 
-        function handleScroll() {
-            const currentScroll = window.scrollY;
+            function handleScroll() {
+                const currentScroll = window.scrollY;
 
-            if (navbar) {
-                if (currentScroll > 50) {
-                    navbar.classList.add(
-                        "bg-white/80",
-                        "backdrop-blur-xl",
-                        "shadow-sm",
-                    );
-                    navbar.classList.remove("bg-transparent");
-                } else {
-                    navbar.classList.remove(
-                        "bg-white/80",
-                        "backdrop-blur-xl",
-                        "shadow-sm",
-                    );
-                    navbar.classList.add("bg-transparent");
+                if (navbar) {
+                    if (currentScroll > 50) {
+                        navbar.classList.add(
+                            "bg-white/80",
+                            "backdrop-blur-xl",
+                            "shadow-sm",
+                        );
+                        navbar.classList.remove("bg-transparent");
+                    } else {
+                        navbar.classList.remove(
+                            "bg-white/80",
+                            "backdrop-blur-xl",
+                            "shadow-sm",
+                        );
+                        navbar.classList.add("bg-transparent");
+                    }
                 }
+
+                lastScroll = currentScroll;
             }
 
-            lastScroll = currentScroll;
+            // Call immediately to set correct initial state
+            handleScroll();
+
+            // Remove any existing scroll listener to prevent duplicates
+            window.removeEventListener("scroll", handleScroll);
+            window.addEventListener("scroll", handleScroll);
         }
 
-        // Call immediately on page load to set correct initial state
-        handleScroll();
+        // Initialize on first page load
+        initNavbarScroll();
 
-        window.addEventListener("scroll", handleScroll);
+        // Re-initialize on every Astro page navigation
+        document.addEventListener("astro:page-load", initNavbarScroll);
 
         // Mobile menu toggle
         const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
