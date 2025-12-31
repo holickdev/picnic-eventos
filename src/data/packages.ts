@@ -37,9 +37,9 @@ export const packages: Package[] = [
       "Flores artificiales",
     ],
     images: [
-      "https://images.unsplash.com/photo-1715341731308-447fb22698bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBwaWNuaWMlMjBzZXR1cHxlbnwxfHx8fDE3NjQ5NTg0MTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "https://images.unsplash.com/photo-1635607194541-122f95591b99?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdW5zZXQlMjBwaWNuaWMlMjByb21hbnRpY3xlbnwxfHx8fDE3NjQ5NTg0MTV8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "https://images.unsplash.com/photo-1760669348014-c23b78739fe7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyb21hbnRpYyUyMGNlbGVicmF0aW9uJTIwdGFibGV8ZW58MXx8fHwxNzY0OTU4NDEzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "/img/picnics/picnic-paquete-bronce.webp",
+      "/img/picnics/picnic-paquete-bronce-2.webp",
+      "/img/picnics/picnic-paquete-bronce-3.webp",
     ],
   },
   {
@@ -60,9 +60,9 @@ export const packages: Package[] = [
       "Flores artificiales",
     ],
     images: [
-      "https://images.unsplash.com/photo-1751040956411-5ba34e6d8237?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBldmVudCUyMGRlY29yfGVufDF8fHx8MTc2NDkyNzY3MHww&ixlib=rb-4.1.0&q=80&w=1080",
-      "https://images.unsplash.com/photo-1763129636444-b590bec06c4f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwcHJvcG9zYWwlMjBzZXR1cHxlbnwxfHx8fDE3NjQ5NTg0MTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "https://images.unsplash.com/photo-1758315526786-3ef1e3b07f7b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaGFtcGFnbmUlMjBjZWxlYnJhdGlvbiUyMG91dGRvb3J8ZW58MXx8fHwxNzY0OTU4NDE0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "/img/picnics/picnic-paquete-esmeralda.webp",
+      "/img/picnics/picnic-paquete-esmeralda-2.webp",
+      "/img/picnics/picnic-paquete-esmeralda-3.webp",
     ],
   },
   {
@@ -86,9 +86,9 @@ export const packages: Package[] = [
       "Flores artificiales",
     ],
     images: [
-      "https://images.unsplash.com/photo-1715341731308-447fb22698bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBwaWNuaWMlMjBzZXR1cHxlbnwxfHx8fDE3NjQ5NTg0MTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "https://images.unsplash.com/photo-1760669348014-c23b78739fe7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyb21hbnRpYyUyMGNlbGVicmF0aW9uJTIwdGFibGV8ZW58MXx8fHwxNzY0OTU4NDEzfDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "https://images.unsplash.com/photo-1635607194541-122f95591b99?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdW5zZXQlMjBwaWNuaWMlMjByb21hbnRpY3xlbnwxfHx8fDE3NjQ5NTg0MTV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "/img/picnics/picnic-paquete-rubi.webp",
+      "/img/picnics/picnic-paquete-rubi-2.webp",
+      "/img/picnics/picnic-paquete-rubi-3.webp",
     ],
   },
   {
@@ -109,9 +109,9 @@ export const packages: Package[] = [
       "Flores artificiales",
     ],
     images: [
-      "https://images.unsplash.com/photo-1602627284160-60b6a907b707?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBicnVuY2glMjB0YWJsZXxlbnwxfHx8fDE3NjQ5NTg0MTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "https://images.unsplash.com/photo-1764265930328-72716076e3ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVnYW50JTIwb3V0ZG9vciUyMGRpbmluZ3xlbnwxfHx8fDE3NjQ5NTg0MTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "https://images.unsplash.com/photo-1755704282977-340323fa52df?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVnYW50JTIwcGFydHklMjBzZXR1cHxlbnwxfHx8fDE3NjQ5NTg0MTR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "/img/picnics/picnic-paquete-plata.webp",
+      "/img/picnics/picnic-paquete-plata-2.webp",
+      "/img/picnics/picnic-paquete-plata-3.webp",
     ],
     bestSeller: true,
   },
@@ -120,7 +120,7 @@ export const packages: Package[] = [
     title: "Paquete Oro",
     price: 100,
     capacity: "Para 25 personas",
-    description: "Grandes eventos. Hasta 25 personas.",
+    description: "Grandes eventos. Hasta 20 personas.",
     items: [
       "Velas",
       "4 Colchas",
@@ -133,9 +133,9 @@ export const packages: Package[] = [
       "Flores artificiales",
     ],
     images: [
-      "https://images.unsplash.com/photo-1751040956411-5ba34e6d8237?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBldmVudCUyMGRlY29yfGVufDF8fHx8MTc2NDkyNzY3MHww&ixlib=rb-4.1.0&q=80&w=1080",
-      "https://images.unsplash.com/photo-1602627284160-60b6a907b707?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBicnVuY2glMjB0YWJsZXxlbnwxfHx8fDE3NjQ5NTg0MTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "https://images.unsplash.com/photo-1755704282977-340323fa52df?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVnYW50JTIwcGFydHklMjBzZXR1cHxlbnwxfHx8fDE3NjQ5NTg0MTR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "/img/picnics/picnic-paquete-bronce-4.webp",
+      "/img/picnics/picnic-paquete-bronce-5.webp",
+      "/img/picnics/picnic-paquete-bronce-6.webp",
     ],
   },
 ];

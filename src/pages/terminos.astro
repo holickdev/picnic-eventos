@@ -22,14 +22,6 @@ const terms = [
         <div
             class="relative bg-gradient-to-br from-[var(--color-dusty-rose)] to-[var(--color-champagne)] py-20 md:py-32 px-5 md:px-12"
         >
-            <!-- Back Button -->
-            <a
-                href="/"
-                class="absolute top-20 md:top-6 left-4 md:left-6 z-20 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-white transition-all animate-on-load animate-fade-in-left"
-            >
-                <ArrowLeft className="w-5 h-5 text-[var(--color-graphite)]" />
-            </a>
-
             <div class="max-w-4xl mx-auto text-center">
                 <div
                     class="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full mb-6 animate-on-load animate-fade-in-down animate-delay-200"
@@ -62,10 +54,10 @@ const terms = [
                     {
                         terms.map((term, index) => (
                             <div
-                                class="flex gap-4 p-5 rounded-2xl hover:bg-[var(--color-soft-sand)]/20 transition-colors animate-on-load animate-fade-in-left"
+                                class="flex items-center gap-4 p-5 rounded-2xl hover:bg-[var(--color-soft-sand)]/20 transition-colors animate-on-load animate-fade-in-left"
                                 style={`animation-delay: ${0.9 + index * 0.05}s;`}
                             >
-                                <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-gradient-rose text-[var(--color-dusty-rose)] rounded-full font-medium text-xl">
+                                <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center bg-[var(--color-soft-sand)] text-[var(--color-dusty-rose)] rounded-full font-medium text-xl">
                                     {index + 1}
                                 </div>
                                 <p class="flex-1 text-[var(--color-graphite)]/80 leading-relaxed pt-2">

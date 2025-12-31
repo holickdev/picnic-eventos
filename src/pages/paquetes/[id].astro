@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { ArrowLeft, Users, Sparkles } from "lucide-react";
+import { Users, Sparkles } from "lucide-react";
 import { packages } from "@/data/packages";
 import { PackageImageGallery } from "@/components/PackageImageGallery";
 import { PackageBookingCard } from "@/components/PackageBookingCard";
@@ -23,7 +23,10 @@ const pageDescription = `${pkg.description} ${pkg.capacity}. Precio: $${pkg.pric
 <Layout title={pageTitle} description={pageDescription}>
     <main class="min-h-screen bg-[var(--color-pearl)] pb-20">
         {/* Hero Section - Server-Side Rendered */}
-        <div class="relative h-[60vh] md:h-[70vh] overflow-hidden">
+        <section
+            id={`hero-${pkg.id}`}
+            class="relative h-[70dvh] md:h-[70vh] overflow-hidden"
+        >
             {/* Image Gallery Component - Cliente */}
             <PackageImageGallery
                 images={pkg.images}
@@ -36,43 +39,39 @@ const pageDescription = `${pkg.description} ${pkg.capacity}. Precio: $${pkg.pric
                 class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 pointer-events-none"
             >
             </div>
+        </section>
 
-            {/* Back Button - Static */}
-            <a
-                href="/#experiencias"
-                class="absolute top-20 md:top-6 left-4 md:left-6 z-20 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-white transition-all"
-            >
-                <ArrowLeft className="w-5 h-5 text-[var(--color-graphite)]" />
-            </a>
-
+        <section
+            id={`content-${pkg.id}`}
+            class="max-w-7xl mx-auto flex flex-col gap-6 md:gap-12 px-5 md:px-12 py-12 md:py-20"
+        >
             {/* Package Title Overlay - Server-Side */}
-            <div class="absolute bottom-0 left-0 right-0 p-6 md:p-12">
-                <div class="max-w-7xl mx-auto">
-                    {
-                        pkg.bestSeller && (
-                            <span class="inline-block px-4 py-1.5 bg-white/95 text-[var(--color-dusty-rose)] rounded-full mb-4">
-                                ✨ Best Seller
-                            </span>
-                        )
-                    }
-                    <div
-                        class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-4"
+            <div class="">
+                {
+                    pkg.bestSeller && (
+                        <span class="inline-block px-4 py-1.5 bg-white/95 text-[var(--color-dusty-rose)] rounded-full mb-4">
+                            ✨ Best Seller
+                        </span>
+                    )
+                }
+                <div
+                    class="text-gray-900 max-w-dvw flex flex-row sm:flex-row sm:justify-start sm:items-baseline gap-10"
+                >
+                    <h1
+                        class="text-[clamp(2.5rem,6vw,5rem)] leading-[1.1] tracking-[-0.01em]"
                     >
-                        <h1 class="text-white">{pkg.title}</h1>
-                        <div class="flex items-baseline gap-3 shrink-0">
-                            <span
-                                class="text-5xl md:text-6xl lg:text-7xl text-white"
-                                >${pkg.price}</span
-                            >
-                            <span class="text-xl text-white/80">USD</span>
-                        </div>
+                        {pkg.title}
+                    </h1>
+                    <div class="flex items-baseline gap-3 shrink-0">
+                        <span class="text-4xl md:text-5xl lg:text-6xl"
+                            >${pkg.price}</span
+                        >
+                        <span class="text-xl">USD</span>
                     </div>
                 </div>
             </div>
-        </div>
 
-        {/* Content Section - Server-Side */}
-        <div class="max-w-7xl mx-auto px-5 md:px-12 py-12 md:py-20">
+            {/* Content Section - Server-Side */}
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
                 {/* Main Content */}
                 <div class="lg:col-span-2">
@@ -102,7 +101,7 @@ const pageDescription = `${pkg.description} ${pkg.capacity}. Precio: $${pkg.pric
                             <h3>¿Qué Incluye?</h3>
                         </div>
 
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {
                                 pkg.items.map((item) => (
                                     <div class="flex items-center gap-3 p-4 bg-[var(--color-soft-sand)]/30 rounded-2xl">
@@ -143,6 +142,6 @@ const pageDescription = `${pkg.description} ${pkg.capacity}. Precio: $${pkg.pric
                     />
                 </div>
             </div>
-        </div>
+        </section>
     </main>
 </Layout>

@@ -3,11 +3,10 @@ import { motion, AnimatePresence } from 'motion/react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const heroImages = [
-  'https://images.unsplash.com/photo-1715341731308-447fb22698bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBwaWNuaWMlMjBzZXR1cHxlbnwxfHx8fDE3NjQ5NTg0MTJ8MA&ixlib=rb-4.1.0&q=80&w=1080',
-  'https://images.unsplash.com/photo-1764265930328-72716076e3ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVnYW50JTIwb3V0ZG9vciUyMGRpbmluZ3xlbnwxfHx8fDE3NjQ5NTg0MTJ8MA&ixlib=rb-4.1.0&q=80&w=1080',
-  'https://images.unsplash.com/photo-1760669348014-c23b78739fe7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyb21hbnRpYyUyMGNlbGVicmF0aW9uJTIwdGFibGV8ZW58MXx8fHwxNzY0OTU4NDEzfDA&ixlib=rb-4.1.0&q=80&w=1080',
-];
-
+  '/img/picnic/picnic-romantico.webp',
+  '/img/picnic/picnic-arte.webp',
+  '/img/picnic/picnic-mariachis.webp',
+]
 export function HeroSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -100,11 +99,10 @@ export function HeroSlider() {
               setDirection(index > currentSlide ? 1 : -1);
               setCurrentSlide(index);
             }}
-            className={`h-1 rounded-full transition-all duration-300 ${
-              index === currentSlide
+            className={`h-1 rounded-full transition-all duration-300 ${index === currentSlide
                 ? 'bg-[var(--color-dusty-rose)] w-8'
                 : 'bg-white/40 w-8 hover:bg-white/60'
-            }`}
+              }`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
@@ -138,14 +136,14 @@ export function HeroSlider() {
                   Experiencias únicas que transforman celebraciones en recuerdos inolvidables
                 </p>
               </div>
-              
+
               {/* Decorative floating element */}
               <motion.div
-                animate={{ 
+                animate={{
                   y: [0, -10, 0],
                   rotate: [0, 5, 0]
                 }}
-                transition={{ 
+                transition={{
                   duration: 4,
                   repeat: Infinity,
                   ease: "easeInOut"

@@ -3,9 +3,9 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const heroImages = [
-    "https://images.unsplash.com/photo-1715341731308-447fb22698bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBwaWNuaWMlMjBzZXR1cHxlbnwxfHx8fDE3NjQ5NTg0MTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-    "https://images.unsplash.com/photo-1764265930328-72716076e3ee?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVnYW50JTIwb3V0ZG9vciUyMGRpbmluZ3xlbnwxfHx8fDE3NjQ5NTg0MTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-    "https://images.unsplash.com/photo-1760669348014-c23b78739fe7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyb21hbnRpYyUyMGNlbGVicmF0aW9uJTIwdGFibGV8ZW58MXx8fHwxNzY0OTU4NDEzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+    "/img/picnics/picnic-romantico.webp",
+    "/img/picnics/picnic-arte.webp",
+    "/img/picnics/picnic-paquete-rubi-3.webp",
 ];
 ---
 
@@ -32,7 +32,7 @@ const heroImages = [
     <!-- Navigation Arrows -->
     <button
         id="prev-slide"
-        class="absolute left-4 md:left-12 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-14 md:h-14 rounded-full glass-morphism flex items-center justify-center hover:bg-white/60 transition-all duration-300 group"
+        class="z-20 absolute left-4 md:left-12 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-14 md:h-14 rounded-full glass-morphism flex items-center justify-center hover:bg-white/60 transition-all duration-300 group"
         aria-label="Previous slide"
     >
         <ChevronLeft
@@ -42,7 +42,7 @@ const heroImages = [
 
     <button
         id="next-slide"
-        class="absolute right-4 md:right-12 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-14 md:h-14 rounded-full glass-morphism flex items-center justify-center hover:bg-white/60 transition-all duration-300 group"
+        class="z-20 absolute right-4 md:right-12 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-14 md:h-14 rounded-full glass-morphism flex items-center justify-center hover:bg-white/60 transition-all duration-300 group"
         aria-label="Next slide"
     >
         <ChevronRight
@@ -72,7 +72,7 @@ const heroImages = [
 
     <!-- Hero Content - Overlapping Text -->
     <div
-        class="absolute inset-0 z-10 flex items-center justify-center px-5 md:px-12 pb-20 md:pb-0"
+        class="absolute inset-50 z-10 flex items-center justify-center px-5 md:px-12 pb-20 md:pb-0"
     >
         <div class="max-w-[1600px] w-full mx-auto">
             <div class="relative">

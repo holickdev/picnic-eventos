@@ -1,0 +1,16 @@
+---
+import { ArrowLeft } from "lucide-react";
+
+interface Props {
+    href?: string;
+}
+
+const { href = "/#experiencias" } = Astro.props;
+---
+
+<a
+    href={href}
+    class="absolute top-20 left-4 md:left-6 z-20 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg hover:bg-white transition-all"
+>
+    <ArrowLeft className="w-5 h-5 text-[var(--color-graphite)]" />
+</a>
