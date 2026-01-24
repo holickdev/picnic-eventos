@@ -2,10 +2,19 @@
 // src/components/HeroSlider.astro
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const heroImages = [
-    "/img/picnics/picnic-romantico.webp",
-    "/img/picnics/picnic-arte.webp",
-    "/img/picnics/picnic-paquete-rubi-3.webp",
+const heroSlides = [
+    {
+        image: "/img/picnics/picnic-romantico-1.webp",
+        title: "MOMENTOS ROMÁNTICOS",
+    },
+    {
+        image: "/img/picnics/picnic-arte.webp",
+        title: "EXPERIENCIAS CREATIVAS",
+    },
+    {
+        image: "/img/picnics/picnic-paquete-rubi-3.webp",
+        title: "CELEBRACIONES ESPECIALES",
+    },
 ];
 ---
 
@@ -13,15 +22,16 @@ const heroImages = [
     <!-- Slider Container -->
     <div class="absolute inset-0">
         {
-            heroImages.map((img, index) => (
+            heroSlides.map((slide, index) => (
                 <div
                     class={`hero-slide absolute inset-0 w-full h-full transition-opacity duration-800 ${index === 0 ? "opacity-100" : "opacity-0"}`}
                     data-slide-index={index}
                 >
                     <img
-                        src={img}
-                        alt={`Luxury picnic event ${index + 1}`}
+                        src={slide.image}
+                        alt={slide.title}
                         class="w-full h-full object-cover"
+                        style="object-position: center 70%;"
                     />
                     <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
                 </div>
@@ -56,7 +66,7 @@ const heroImages = [
         id="dots-container"
     >
         {
-            heroImages.map((_, index) => (
+            heroSlides.map((_, index) => (
                 <button
                     class={`dot h-1 rounded-full transition-all duration-300 ${
                         index === 0
@@ -70,73 +80,77 @@ const heroImages = [
         }
     </div>
 
-    <!-- Hero Content - Overlapping Text -->
+    <!-- Hero Content - Responsive Layout -->
     <div
-        class="absolute inset-50 z-10 flex items-center justify-center px-5 md:px-12 pb-20 md:pb-0"
+        class="absolute inset-0 z-10 flex flex-col md:flex-row md:items-center md:justify-center px-5 md:px-12"
     >
-        <div class="max-w-[1600px] w-full mx-auto">
-            <div class="relative">
-                <!-- Main Display Title -->
+        <div
+            class="w-full max-w-5xl mx-auto text-center flex flex-col h-full md:h-auto justify-between md:justify-center"
+        >
+            <!-- Text Content Group (Top on mobile, centered on desktop) -->
+            <div class="mt-20 md:mt-0">
+                <!-- Brand Name -->
                 <div
-                    class="relative animate-on-load animate-fade-in-up animate-delay-600"
+                    class="animate-on-load animate-fade-in-up animate-delay-400"
                 >
                     <h1
-                        class="text-3xl sm:text-4xl md:text-display text-white mix-blend-difference select-none leading-tight"
+                        class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl text-white select-none leading-tight mb-2 md:mb-4"
                         style="text-shadow: 2px 2px 20px rgba(0,0,0,0.5)"
                     >
-                        MOMENTOS INOLVIDABLES
+                        Picnic Eventos:
                     </h1>
                 </div>
 
-                <!-- Subtitle with organic shape background -->
-                <div
-                    class="relative mt-4 md:mt-8 ml-0 md:ml-12 max-w-lg animate-on-load animate-fade-in-left animate-delay-800"
-                >
-                    <div
-                        class="relative z-10 bg-white/90 backdrop-blur-md px-5 py-4 md:px-8 md:py-6 rounded-3xl shadow-xl"
+                <!-- Dynamic Subtitle Container -->
+                <div class="relative mb-6 md:mb-8">
+                    {
+                        heroSlides.map((slide, index) => (
+                            <h2
+                                class={`hero-title absolute inset-0 text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-white select-none leading-tight transition-opacity duration-800 ${index === 0 ? "opacity-100" : "opacity-0"}`}
+                                data-title-index={index}
+                                style="text-shadow: 2px 2px 20px rgba(0,0,0)"
+                            >
+                                {slide.title}
+                            </h2>
+                        ))
+                    }
+                    <!-- Spacer to maintain layout height -->
+                    <h2
+                        class="text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-transparent select-none leading-tight"
+                        aria-hidden="true"
                     >
-                        <p
-                            class="text-[var(--color-graphite)] text-sm md:text-xl leading-relaxed"
-                        >
-                            Experiencias únicas que transforman celebraciones en
-                            recuerdos inolvidables
-                        </p>
-                    </div>
-
-                    <!-- Decorative floating element -->
-                    <div
-                        class="absolute -top-4 -right-4 w-16 h-16 bg-[var(--color-dusty-rose)] opacity-40 rounded-full blur-xl animate-float"
-                    >
-                    </div>
-                </div>
-
-                <!-- CTA Button -->
-                <div
-                    class="mt-6 md:mt-16 ml-0 md:ml-12 animate-on-load animate-fade-in-up animate-delay-1000"
-                >
-                    <a
-                        href="#experiencias"
-                        class="inline-flex items-center justify-center glass-morphism px-6 py-3 md:px-10 md:py-5 min-h-[48px] rounded-full hover:bg-white/70 transition-all duration-500 group shadow-lg"
-                    >
-                        <span
-                            class="text-sm md:text-lg tracking-wide text-[var(--color-graphite)] group-hover:text-[var(--color-dusty-rose)] transition-colors"
-                        >
-                            Descubre Nuestras Experiencias
-                        </span>
-                    </a>
+                        EXPERIENCIAS CREATIVAS
+                    </h2>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Scroll Indicator - Hidden on mobile -->
-    <div
-        class="absolute bottom-24 md:bottom-12 left-1/2 -translate-x-1/2 z-10 hidden md:block animate-on-load animate-fade-in animate-delay-1000"
-    >
-        <div
-            class="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center pt-2"
-        >
-            <div class="w-1 h-3 bg-white/60 rounded-full animate-bounce"></div>
+            <!-- CTA Button (Bottom on mobile, centered on desktop) -->
+            <div
+                class="mb-20 md:mb-0 md:mt-8 animate-on-load animate-fade-in-up animate-delay-1000"
+            >
+                <a
+                    href="#paquetes"
+                    class="inline-flex items-center justify-center bg-[var(--color-dusty-rose)]/90 hover:bg-[var(--color-dusty-rose)] px-8 py-4 md:px-12 md:py-5 min-h-[48px] rounded-full transition-all duration-500 group shadow-xl"
+                >
+                    <span
+                        class="text-sm md:text-lg tracking-wide text-white font-medium"
+                    >
+                        Explorar Ahora
+                    </span>
+                    <svg
+                        class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
+            </div>
         </div>
     </div>
 </section>
@@ -160,6 +174,18 @@ const heroImages = [
         if (slides[index]) {
             slides[index].style.opacity = "1";
         }
+
+        // Update titles
+        const titles = document.querySelectorAll(
+            ".hero-title",
+        ) as NodeListOf<HTMLElement>;
+        titles.forEach((title, i) => {
+            if (i === index) {
+                title.style.opacity = "1";
+            } else {
+                title.style.opacity = "0";
+            }
+        });
 
         // Update dots
         dots.forEach((dot, i) => {
@@ -243,6 +269,10 @@ const heroImages = [
 
 <style>
     .hero-slide {
+        will-change: opacity;
+    }
+
+    .hero-title {
         will-change: opacity;
     }
 

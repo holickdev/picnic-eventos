@@ -1,0 +1,15 @@
+services:
+  dev:
+    container_name: node
+    image: node:lts
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    volumes:
+      - .:/app
+    working_dir: /app
+    ports:
+      - "4321:4321"
+    tty: true
+    stdin_open: true
+    command: bash

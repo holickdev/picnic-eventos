@@ -1,5 +1,6 @@
 import { atom, computed } from 'nanostores';
-import { packages, stations } from '@/data/packages';
+import { packages } from '@/data/packages';
+import { stations } from '@/data/stations';
 
 export interface CartItem {
   id: string;
@@ -33,7 +34,7 @@ export function addPackageToCart(packageId: string) {
     },
     ...cartItems.get().filter(item => item.type !== 'package')
   ]);
-  
+
   // Persist to localStorage
   if (typeof window !== 'undefined') {
     localStorage.setItem('cart', JSON.stringify(cartItems.get()));
@@ -48,7 +49,7 @@ export function addStationToCart(stationId: string) {
   const current = cartItems.get();
   const exists = current.some(item => item.id === stationId);
   if (exists) return;
-  
+
   cartItems.set([
     ...current,
     {
@@ -57,7 +58,7 @@ export function addStationToCart(stationId: string) {
       title: station.title,
     }
   ]);
-  
+
   // Persist to localStorage
   if (typeof window !== 'undefined') {
     localStorage.setItem('cart', JSON.stringify(cartItems.get()));
@@ -66,7 +67,7 @@ export function addStationToCart(stationId: string) {
 
 export function removeFromCart(id: string) {
   cartItems.set(cartItems.get().filter(item => item.id !== id));
-  
+
   // Update localStorage
   if (typeof window !== 'undefined') {
     localStorage.setItem('cart', JSON.stringify(cartItems.get()));
@@ -75,7 +76,7 @@ export function removeFromCart(id: string) {
 
 export function clearCart() {
   cartItems.set([]);
-  
+
   // Clear localStorage
   if (typeof window !== 'undefined') {
     localStorage.removeItem('cart');

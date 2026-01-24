@@ -1,10 +1,9 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import { ArrowLeft, Sparkles } from "lucide-react";
-import { stations } from "@/data/packages";
-import { StationImageGallery } from "@/components/StationImageGallery";
+import { Sparkles } from "lucide-react";
+import { stations } from "@/data/stations";
+import { ImageGallery } from "@/components/ImageGallery";
 import { StationBookingCard } from "@/components/StationBookingCard";
-import BackButton from "@/components/BackButton.astro";
 
 // Static paths generation - se ejecuta en build time
 export async function getStaticPaths() {
@@ -29,7 +28,7 @@ const pageDescription = `${station.description} Precio bajo consulta.`;
             class="relative h-[70dvh] md:h-[70vh] overflow-hidden"
         >
             {/* Image Gallery Component - Cliente */}
-            <StationImageGallery
+            <ImageGallery
                 images={station.images}
                 title={station.title}
                 client:load

@@ -2,7 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import { Users, Sparkles } from "lucide-react";
 import { packages } from "@/data/packages";
-import { PackageImageGallery } from "@/components/PackageImageGallery";
+import { ImageGallery } from "@/components/ImageGallery";
 import { PackageBookingCard } from "@/components/PackageBookingCard";
 
 // Static paths generation - se ejecuta en build time
@@ -25,20 +25,10 @@ const pageDescription = `${pkg.description} ${pkg.capacity}. Precio: $${pkg.pric
         {/* Hero Section - Server-Side Rendered */}
         <section
             id={`hero-${pkg.id}`}
-            class="relative h-[70dvh] md:h-[70vh] overflow-hidden"
+            class="relative h-[70dvh] md:h-[70vh] overflow-hidden bg-gradient-to-b from-black/40 via-transparent to-black/60"
         >
             {/* Image Gallery Component - Cliente */}
-            <PackageImageGallery
-                images={pkg.images}
-                title={pkg.title}
-                client:load
-            />
-
-            {/* Overlay Gradient */}
-            <div
-                class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 pointer-events-none"
-            >
-            </div>
+            <ImageGallery images={pkg.images} title={pkg.title} client:load />
         </section>
 
         <section

@@ -1,0 +1,195 @@
+---
+// ImageGallery.astro - Pure Astro component with vanilla JS
+interface Props {
+    images: string[];
+    title: string;
+}
+
+const { images, title } = Astro.props;
+---
+
+<div class="image-gallery-container relative w-full h-full">
+    {/* Blurred Background Layer - Only visible on desktop */}
+    <div class="blur-background-container absolute inset-0 hidden md:block overflow-hidden">
+        {
+            images.map((image, index) => (
+                <div
+                    class={`blur-bg-image absolute inset-0 transition-opacity duration-600 ${index === 0 ? "opacity-100" : "opacity-0"}`}
+                    data-bg-index={index}
+                >
+                    <img
+                        src={image}
+                        alt=""
+                        aria-hidden="true"
+                        class="w-full h-full object-cover scale-110 blur-2xl brightness-75"
+                    />
+                </div>
+            ))
+        }
+    </div>
+
+    {/* Main Images Container */}
+    <div class="main-images-container absolute inset-0 z-[1]">
+        {
+            images.map((image, index) => (
+                <img
+                    src={image}
+                    alt={`${title} - Photo ${index + 1}`}
+                    class={`gallery-image absolute inset-0 w-full h-full object-cover md:object-contain transition-opacity duration-600 ${index === 0 ? "opacity-100" : "opacity-0"}`}
+                    data-image-index={index}
+                />
+            ))
+        }
+    </div>
+
+    {/* Image Navigation - Only show if more than 1 image */}
+    {
+        images.length > 1 && (
+            <>
+                <button
+                    class="prev-btn absolute left-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center transition-all shadow-lg hover:bg-white/30"
+                    aria-label="Previous image"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="text-white"
+                    >
+                        <path d="m15 18-6-6 6-6" />
+                    </svg>
+                </button>
+
+                <button
+                    class="next-btn absolute right-6 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center transition-all shadow-lg hover:bg-white/30"
+                    aria-label="Next image"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="text-white"
+                    >
+                        <path d="m9 18 6-6-6-6" />
+                    </svg>
+                </button>
+
+                {/* Image Dots */}
+                <div class="dots-container absolute bottom-5 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+                    {images.map((_, index) => (
+                        <button
+                            class={`gallery-dot w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === 0 ? "bg-white w-8" : "bg-white/50 hover:bg-white/75"}`}
+                            data-dot-index={index}
+                            aria-label={`Go to image ${index + 1}`}
+                        />
+                    ))}
+                </div>
+            </>
+        )
+    }
+</div>
+
+<script>
+    // Image Gallery functionality with vanilla JS
+    const gallery = document.querySelector('.image-gallery-container');
+    
+    if (gallery) {
+        let currentIndex = 0;
+        const images = gallery.querySelectorAll('.gallery-image') as NodeListOf<HTMLElement>;
+        const bgImages = gallery.querySelectorAll('.blur-bg-image') as NodeListOf<HTMLElement>;
+        const dots = gallery.querySelectorAll('.gallery-dot') as NodeListOf<HTMLElement>;
+        const totalImages = images.length;
+
+        function showImage(index: number) {
+            // Hide all images and backgrounds
+            images.forEach((img) => {
+                img.style.opacity = '0';
+            });
+            bgImages.forEach((bg) => {
+                bg.style.opacity = '0';
+            });
+
+            // Show current image and background
+            if (images[index]) {
+                images[index].style.opacity = '1';
+            }
+            if (bgImages[index]) {
+                bgImages[index].style.opacity = '1';
+            }
+
+            // Update dots
+            dots.forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.add('bg-white', 'w-8');
+                    dot.classList.remove('bg-white/50');
+                } else {
+                    dot.classList.remove('bg-white', 'w-8');
+                    dot.classList.add('bg-white/50');
+                }
+            });
+
+            currentIndex = index;
+        }
+
+        function nextImage() {
+            const next = (currentIndex + 1) % totalImages;
+            showImage(next);
+        }
+
+        function prevImage() {
+            const prev = (currentIndex - 1 + totalImages) % totalImages;
+            showImage(prev);
+        }
+
+        // Navigation buttons
+        const prevBtn = gallery.querySelector('.prev-btn');
+        const nextBtn = gallery.querySelector('.next-btn');
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', prevImage);
+        }
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', nextImage);
+        }
+
+        // Dot navigation
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showImage(index);
+            });
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                prevImage();
+            } else if (e.key === 'ArrowRight') {
+                nextImage();
+            }
+        });
+    }
+</script>
+
+<style>
+    .gallery-image,
+    .blur-bg-image {
+        will-change: opacity;
+    }
+
+    .gallery-dot {
+        will-change: width, background-color;
+    }
+</style>

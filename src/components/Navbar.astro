@@ -88,19 +88,19 @@ const menuItems = [
 
                 if (navbar) {
                     if (currentScroll > 50) {
+                        navbar.classList.remove("bg-transparent", "text-white/80");
                         navbar.classList.add(
                             "bg-white/80",
                             "backdrop-blur-xl",
                             "shadow-sm",
                         );
-                        navbar.classList.remove("bg-transparent");
                     } else {
+                        navbar.classList.add("bg-transparent", "text-white/80");
                         navbar.classList.remove(
                             "bg-white/80",
                             "backdrop-blur-xl",
                             "shadow-sm",
                         );
-                        navbar.classList.add("bg-transparent");
                     }
                 }
 
