@@ -117,7 +117,7 @@ export function StationCard({ id, title, description, images }: StationCardProps
 
           {/* View Details Button */}
           <a
-            href={`/experiencias/${id}`}
+            href={`/estaciones/${id}`}
             className="w-full py-3 rounded-full border-2 border-[var(--color-dusty-rose)] text-[var(--color-dusty-rose)] hover:bg-[var(--color-dusty-rose)] hover:text-white transition-all duration-300 flex items-center justify-center"
           >
             Ver Detalles

@@ -5,9 +5,10 @@ import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 interface ImageGalleryProps {
     images: string[];
     title: string;
+    referencial_images?: boolean;
 }
 
-export function ImageGallery({ images, title }: ImageGalleryProps) {
+export function ImageGallery({ images, title, referencial_images }: ImageGalleryProps) {
     const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
     const [fullScreen, setFullScreen] = useState<boolean>(false);
 
@@ -68,6 +69,10 @@ export function ImageGallery({ images, title }: ImageGalleryProps) {
             >
                 <X className="text-white rounded-full" />
             </button>
+
+            {referencial_images && (
+                <span className="absolute bottom-3.5 right-3.5 z-[10] text-xs text-white bg-[var(--color-dusty-rose)] p-2 rounded-xl">Imágenes referenciales</span>
+            )}
             {/* Image Gallery with Blur Background Effect (Desktop) */}
             <AnimatePresence mode="wait">
                 {/* Blurred Background Layer - Only visible on desktop */}
@@ -87,6 +92,7 @@ export function ImageGallery({ images, title }: ImageGalleryProps) {
                     />
                 </motion.div>
                 {/* Main Image - Desktop: object-contain with blur bg, Mobile: object-cover */}
+
                 <motion.img
                     onClick={() => setFullScreen(true)}
                     key={currentImageIndex}
